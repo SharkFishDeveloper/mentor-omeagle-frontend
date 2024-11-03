@@ -57,14 +57,14 @@ const Appbar = () => {
                 <p className="text-gray-900 cursor-pointer hover:text-blue-700 dark:text-white dark:hover:text-blue-500" onClick={handleLogout}>Logout</p>
               )}
             </li>
+            <li>
+             <Link to="/connect" className="text-gray-900 hover:text-blue-700 dark:text-white dark:hover:text-blue-500">Connect</Link>
+           </li>
            {user && (
              <li>
              <Link to="/search" className="text-gray-900 hover:text-blue-700 dark:text-white dark:hover:text-blue-500">Search</Link>
            </li>
            )}
-            <li>
-             <Link to="/connect" className="text-gray-900 hover:text-blue-700 dark:text-white dark:hover:text-blue-500">Connect</Link>
-           </li>
           </ul>
         </div>
       </div>
@@ -89,6 +89,11 @@ const Appbar = () => {
             <li>
               <Link to="/connect" className="text-gray-900 hover:text-blue-700 dark:text-white dark:hover:text-blue-500" >Connect</Link>
             </li>
+            {user && (
+             <li>
+             <Link to="/search" className="text-gray-900 hover:text-blue-700 dark:text-white dark:hover:text-blue-500">Search</Link>
+            </li>
+           )}
           </ul>
         </div>
       )}
