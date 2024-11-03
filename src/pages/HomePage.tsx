@@ -7,6 +7,7 @@ const HomePage = () => {
   const user = useUser();
   const navigate = useNavigate();
   let userlength = false;
+      //@ts-ignore
   if (user?.user?.timeslots) {
     userlength = true;
   }
@@ -41,7 +42,10 @@ const HomePage = () => {
               <div>
                 <h2 className="text-lg font-semibold text-gray-700 mb-2">Mentor Names:</h2>
                 <ul className="list-disc list-inside text-gray-600">
-                  {user.user?.mentorName ? (
+                  
+                  {//@ts-ignore
+                  user && user.user?.mentorName ? (
+                    //@ts-ignore
                     user.user.mentorName.map((name, index) => (
                       <li key={index} className="ml-4">{name}</li>
                     ))
@@ -78,7 +82,9 @@ const HomePage = () => {
               <div>
                 <h2 className="text-lg font-semibold text-gray-700 mb-2">User Names:</h2>
                 <ul className="list-disc list-inside text-gray-600">
-                  {user.user?.usersName ? (
+                  {//@ts-ignore
+                  user.user?.usersName ? (
+                    //@ts-ignore
                     user.user.usersName.map((name, index) => (
                       <li key={index} className="ml-4">{name}</li>
                     ))

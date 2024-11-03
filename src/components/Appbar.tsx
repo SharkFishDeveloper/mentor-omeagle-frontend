@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import  { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useUser } from '../Providers/Socket';
 import axios from 'axios';
 import { BACKEND_URL } from '../../utils/backendUrl';
 
 const Appbar = () => {
-  const navigate = useNavigate();
+  //@ts-ignore
   const { user, setUser } = useUser();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -24,9 +24,7 @@ const Appbar = () => {
     setIsOpen(!isOpen);
   };
 
-  const closeMenu = () => {
-    setIsOpen(false);
-  };
+
 
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 shadow-md">

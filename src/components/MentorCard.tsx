@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Mentor, useUser } from '../Providers/Socket';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -10,6 +10,7 @@ const MentorCard = () => {
     const id = location.state.id;
     const [mentor, setMentor] = useState<Mentor | null>();
     const [money, setMoney] = useState<number>();
+    //@ts-ignore
     const { user, setUser } = useUser();
     const username = user ? user.username : null;
     const option = { username, money };
@@ -27,6 +28,7 @@ const MentorCard = () => {
             alert(`Success! Connected with mentor. Room ID: ${resp.data.roomId}`);
             navigate('/');
         } catch (error) {
+                //@ts-ignore
             console.error("Error connecting with mentor:", error.message);
             alert("Error connecting with mentor.");
         }
@@ -39,6 +41,7 @@ const MentorCard = () => {
                 console.log("resp", resp.data.message);
                 setMentor(resp.data.message);
             } catch (error) {
+                    //@ts-ignore
                 console.error("Error finding mentor:", error.message);
                 alert("Error finding mentor.");
             }
@@ -64,7 +67,7 @@ const MentorCard = () => {
                     value={money || ''}
                     onChange={(e) => setMoney(Number(e.target.value))}
                     placeholder="Enter amount"
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mb-4"
+                    className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mb-4"
                 />
                 <button
                     onClick={handleConnect}

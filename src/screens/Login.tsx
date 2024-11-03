@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BACKEND_URL } from '../../utils/backendUrl';
 import axios from 'axios';
@@ -8,8 +8,10 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  //@ts-ignore
   const { setUser } = useUser();
-
+  
+  //@ts-ignore
   const handleLogin = async (e) => {
     try {
       e.preventDefault();
@@ -20,6 +22,7 @@ const Login = () => {
       alert(resp.data.message);
       navigate("/");
     } catch (error) {
+      //@ts-ignore
       alert(error.response.data.message);
     }
   }

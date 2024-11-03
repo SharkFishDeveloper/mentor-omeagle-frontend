@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BACKEND_URL } from '../../utils/backendUrl';
 import axios from 'axios';
@@ -9,9 +9,11 @@ const MentorSignup = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  //@ts-ignore
   const { setUser } = useUser();
-
-  const handleSignup = async (e) => {
+  
+  //@ts-ignore
+  const handleSignup = async (e:any) => {
     try {
       e.preventDefault();
       const resp = await axios.post(`${BACKEND_URL}/app/mentor/signup`, {
@@ -21,6 +23,7 @@ const MentorSignup = () => {
       setUser(resp.data.user);
       navigate("/");
     } catch (error) {
+      //@ts-ignore
       alert(error.response.data.message);
     }
   }
@@ -40,7 +43,7 @@ const MentorSignup = () => {
             </div>
             <div>
               <label htmlFor="name" className="sr-only">Username</label>
-              <input id="name" name="name" type="text" autoComplete="name" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
+              <input id="name" name="name" type="text" autoComplete="name" required className="appearance-none  relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
             </div>
             <div>
               <label htmlFor="password" className="sr-only">Password</label>

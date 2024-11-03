@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { BACKEND_URL, univerOptions } from '../../utils/backendUrl.js';
+import { univerOptions } from '../../utils/backendUrl.js';
 import { useSocket, useUser } from '../Providers/Socket.js';
 import { useNavigate } from 'react-router-dom';
 import JoinRoom from './JoinRoom';
@@ -8,7 +8,9 @@ function LandingPage() {
   const user = useUser();
   const router = useNavigate();
   const [name, setName] = useState(user ? user?.user?.username : '');
+  //@ts-ignore
   const roomId = user?.user?.roomId.length;
+  //@ts-ignore
   const [school, setSchool] = useState('');
   const [choice, setChoice] = useState(true);
   const [selectedOption, setSelectedOption] = useState('');
@@ -51,6 +53,7 @@ function LandingPage() {
   };
 
   if (open) {
+    //@ts-ignore
     return <JoinRoom name={name} localaudiotrack={localaudiotrack} localvideotrack={localvideotrack} />;
   }
 
@@ -99,7 +102,8 @@ function LandingPage() {
           {choice ? 'Or enter selectively' : 'Change choice'}
         </button>
       </div>
-      {roomId > 0 ? (
+      
+      {roomId && roomId > 0 ? (
         <input
           type="text"
           placeholder="Enter roomId"

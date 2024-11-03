@@ -1,6 +1,6 @@
-import  { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import  {  useEffect,  useRef, useState } from 'react'
 import { useSocket } from '../Providers/Socket';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { FaPhoneAlt } from "react-icons/fa";
 // import "./video.css"
 
@@ -13,26 +13,34 @@ const JoinRoom = ({name,localaudiotrack,localvideotrack}:
   }
   ) => {
     const socket = useSocket();
-    const videoRef = useRef<HTMLVideoElement>();
+    //@ts-ignore
     const [remoteaudiotrack,setRemoteaudiotrack] = useState<MediaStreamTrack|null>(null);
+    //@ts-ignore
     const [remotevideotrack,setRemotevideotrack] = useState<MediaStreamTrack|null>(null);
+    //@ts-ignore
     const [sendingPc, setSendingPc] = useState<null | RTCPeerConnection>(null);
+    //@ts-ignore
     const [receivingPc, setReceivingPc] = useState<null | RTCPeerConnection>(null);
+    //@ts-ignore
     const [isConnected,setisConnected] = useState(false);
+    //@ts-ignore
     const [localMediaStream, setLocalMediaStream] = useState<MediaStream | null>(null);
     const localVideoRef = useRef<HTMLVideoElement>();
+    //@ts-ignore
     const [sender,setSender] = useState(false);
+    //@ts-ignore
     const [remotemediastream,setRemotemediastream] = useState<MediaStream|null>();
     const remoteVideoRef = useRef<HTMLVideoElement>();
     const [user2name,setuser2name] = useState<string|null>();
     const [message, setMessage] = useState('');
-    const [sendmessages, setsendmessages] = useState([]);
-    const [receivedMessages, setreceivedMessages] = useState([]);
+
+    //@ts-ignore
     const [roomId,setRoomId] = useState("");
     const navigate = useNavigate();
-
+    
     const [allmessages, setAllMessages] = useState<Message[]>([]);
-
+    
+    //@ts-ignore
     const [currentMesasge, setCurrentMesasge] = useState<string>([]);
 
     const MessageType = {
@@ -89,10 +97,12 @@ const JoinRoom = ({name,localaudiotrack,localvideotrack}:
             socket?.on("add-ice-candidate",({candidate,type})=>{
               console.log("REcieviig ice locally")
               if(type == "sender"){
+                //@ts-ignore
                 setReceivingPc(pc=>{
                   pc?.addIceCandidate(candidate);
                 })
               }else{
+                //@ts-ignore
                 setSendingPc(pc=>{
                   pc?.addIceCandidate(candidate);
                 })
@@ -102,16 +112,20 @@ const JoinRoom = ({name,localaudiotrack,localvideotrack}:
             socket?.on("offer",async({sdp:sdpA}:{sdp:string})=>{
               const pc = new RTCPeerConnection();
                 const remoteDescription = {
-                  type: sdpA.type, // Set the type ("offer" or "answer")
+                  //@ts-ignore
+                  type: sdpA.type,
+                  //@ts-ignore 
                   sdp: sdpA.sdp,
                   };
                   setReceivingPc(pc); 
                   const stream = new MediaStream();
+                  //@ts-ignore
                   remoteVideoRef.current.srcObject = stream;
                   // if(remoteVideoRef.current){
                   //   remoteVideoRef.current.srcObject = stream;
                   // }
                   setRemotemediastream(stream);
+                  //@ts-ignore
                   window.pcr = pc;
                   console.log("recieved sdp after offering ",remoteDescription)
                   await pc.setRemoteDescription(remoteDescription);
@@ -130,7 +144,7 @@ const JoinRoom = ({name,localaudiotrack,localvideotrack}:
                   }
 
 
-
+                  //@ts-ignore
                   pc.ontrack = ({track,type})=>{
                     alert("on tracks")
 
@@ -151,8 +165,11 @@ const JoinRoom = ({name,localaudiotrack,localvideotrack}:
               setRemotevideotrack(track2)        
                                    
             }
+            //@ts-ignore
             if(remoteVideoRef.current.srcObject){
+              //@ts-ignore
               remoteVideoRef.current.srcObject.addTrack(track1);
+              //@ts-ignore
             remoteVideoRef.current.srcObject.addTrack(track2);
             }else{
               console.error("not added in srcObj")
@@ -182,6 +199,7 @@ const JoinRoom = ({name,localaudiotrack,localvideotrack}:
     if (localvideotrack) {
       //localaudiotrack,
       const mediaStream = new MediaStream([ localvideotrack]);
+      //@ts-ignore
       localVideoRef.current.srcObject = mediaStream;
     }
   },[localaudiotrack, localvideotrack])
@@ -252,12 +270,14 @@ return (
         <video
           id='main'
           autoPlay
+          //@ts-ignore
           ref={localVideoRef}
           className="w-1/4 h-1/4 object-cover rounded-lg absolute top-4 right-4 z-10" // Small local video positioned at the top right
         />
         <video
           id='other'
           autoPlay
+          //@ts-ignore
           ref={remoteVideoRef}
           className="w-full h-full object-cover rounded-lg" // Full size for the remote video
         />

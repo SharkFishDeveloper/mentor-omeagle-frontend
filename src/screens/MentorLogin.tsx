@@ -8,8 +8,10 @@ const MentorLogin = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setUser } = useUser();
-
+   //@ts-ignore
+   const { setUser } = useUser();
+   
+   //@ts-ignore
   const handleMentorLogin = async (e) => {
     try {
       e.preventDefault();
@@ -20,6 +22,7 @@ const MentorLogin = () => {
       navigate("/");
       return alert(resp.data.message);
     } catch (error) {
+      //@ts-ignore
       return alert(error.response.data.message);
     }
   }

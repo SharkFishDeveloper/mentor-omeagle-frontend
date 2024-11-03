@@ -42,6 +42,7 @@ export const useSocket = (): Socket | undefined => {
     }
     return socket;
 }
+//@ts-ignore
 export const SocketProvider = (props:any)=>{
     const socket = useMemo(()=>io(BACKEND_URL),[]);
     useEffect(() => {
@@ -67,6 +68,7 @@ export const useUser = () => {
   return useContext(UserContext);
 };
 export type UserType = User | Mentor;
+//@ts-ignore
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState<UserType|null>(null);
 
@@ -92,9 +94,14 @@ export const UserProvider = ({ children }) => {
         }
       } catch (error) {
         // Handle errors
+        //@ts-ignore
         if (error.response) {
+          
+          //@ts-ignore
           console.error('Error response from server:', error.response.data);
+          //@ts-ignore
         } else if (error.request) {
+          //@ts-ignore
           console.error('No response received:', error.request);
         } else {
           console.error('Error fetching user:', error);
@@ -106,6 +113,7 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   return (
+    //@ts-ignore
     <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>

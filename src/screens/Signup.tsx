@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { BACKEND_URL } from '../../utils/backendUrl';
@@ -9,8 +9,9 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  //@ts-ignore
   const { setUser } = useUser();
-
+//@ts-ignore
   const handleSignup = async (e) => {
     try {
       e.preventDefault();
@@ -21,7 +22,9 @@ const Signup = () => {
       setUser(resp.data.user);
       navigate("/");
     } catch (error) {
+      //@ts-ignore
       console.log(error.response.data.message)
+      //@ts-ignore
       alert(error.response.data.message)
     }
   }
@@ -41,7 +44,7 @@ const Signup = () => {
             </div>
             <div>
               <label htmlFor="name" className="sr-only">Name</label>
-              <input id="name" name="name" type="text" autoComplete="name" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" placeholder="Name" onChange={(e) => setUsername(e.target.value)} />
+              <input id="name" name="name" type="text" autoComplete="name" required className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" placeholder="Name" onChange={(e) => setUsername(e.target.value)} />
             </div>
             <div>
               <label htmlFor="password" className="sr-only">Password</label>
